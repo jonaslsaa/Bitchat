@@ -19,6 +19,7 @@ def StartListen():
     sock.close()
 
 def gotData(data, addr):
+    print(data)
     data = data.split("|")
     
     if data[0] == "msg":
