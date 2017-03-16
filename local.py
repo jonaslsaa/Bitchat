@@ -7,7 +7,7 @@ def load(file):
         fo = open(file, "r")
         data = fo.readlines()
         fo.close()
-        return data
+        return data.strip("\n")
     except:
         print("load error")
 def append(data, file):
