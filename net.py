@@ -9,7 +9,7 @@ history = []
 
 def StartListen():
     host = "127.0.0.1"
-    port = 19012
+    port = 1900
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((host, port))
     
