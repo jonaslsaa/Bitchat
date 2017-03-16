@@ -34,6 +34,7 @@ def gotData(data, addr):
     
     if data[0] == "ping":
         SendData("alive", addr)
+        peers.alives.append(addr)
     if data[0] == "alive":
         peers.alives.append(addr)
     if data[0] == "peer":
