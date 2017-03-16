@@ -14,6 +14,8 @@ def gatherAlives():
     peers = getLocalPeers()
     global alives
     alives = []
+    for addr in peers:
+        net.SendData("ping", addr)
 
 def cleanup():
     pass
