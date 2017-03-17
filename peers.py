@@ -18,8 +18,17 @@ def gatherAlives():
         net.SendData("ping", addr)
 
 def cleanup():
-    pass
+    clean = []
+    global alives
+    if len(alives[0]) > 0:
+        clean.append(alives[0])
+    for i in alives:
+        for c in clean:
+            if i != c:
+                clean.append(i)
+    alives = clean
 
 def updatePeers():
+    global alives
     for addr in alives:
         SendData("updatepeers", addr)
