@@ -90,4 +90,8 @@ def updatePeers():
     for addr in alives:
         SendData("updatepeers", addr)
 
+def aliveAppend(x):
+    alives.append(x)
+def getAlives():
+    return alives
 
