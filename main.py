@@ -20,7 +20,7 @@ def startup():
         global username
         username = usernm
     print("Connecting...")
-    time.sleep(5)
+    time.sleep(2)
     print(str(username)+" connected. \n\n\n")
     print("")
     
@@ -29,15 +29,23 @@ def startup():
 
 def routine():
     while 1:
-        peers.updatePeers() # tries to get more peers, expands network
+        #peers.updatePeers() # tries to get more peers, expands network
         peers.gatherAlives() # organizes who is online
-        peers.cleanup() # clean up code
         time.sleep(30) # does ^^ this every 5 minutes
+        peers.cleanup() # clean up code, broken
 
 def messaging():
     msg = input(": ")
-    data = str(username) + ": " + str(msg)
-    for addr in peers.alives:
-        net.SendData("msg|"+data+"|"+net.id(), addr)
+    if data != "":
+        ID = net.id()
+        data = str(username) + ": " + str(msg)
+        alives = peers.getAlives()
+        for addr in alives:
+            threading.Thread(target=net.SendData, args=("msg|"+data+"|"+ID,addr)).start()
+        print(alives)
+
+def message(data, addr):
+    net.SendData("msg|"+data+"|"+ID, addr)
         
+
 startup()
