@@ -1,14 +1,15 @@
 import time
 import socket
 import threading
-import peers
+import peers as ps
 import string
 import random
 
 history = []
+alives = []
 
 def StartListen():
-    host = "127.0.0.1"
+    host = "" #your ip
     port = 1900
     while 1:
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -19,7 +20,7 @@ def StartListen():
         threading.Thread(target=gotData, args=(gData,gAddr)).start()
         #gotData(data.decode(), addr[0]) # in threading ^
         sock.close()
-    
+
 def gotData(rawdata, addr):
     print("recv: "+rawdata)
     data = rawdata.split("|")
@@ -63,3 +64,30 @@ def SendData(data, host):
 
 def id(size=6, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
+def gatherAlives():
+    peers = getLocalPeers()
+    global alives
+    alives = []
+    #print(peers[0])
+    for addr in peers:
+        #print("addr: "+addr)
+        net.SendData("ping", addr)
+
+def cleanup():
+    clean = []
+    wasCleaned = False
+    global alives
+    for i in alives:
+        if i not in clean:
+            clean.append(i)
+            wasCleaned == True
+    if wasCleaned == True:
+        alives = clean
+            
+def updatePeers():
+    global alives
+    for addr in alives:
+        net.SendData("updatepeers", addr)
+
+
