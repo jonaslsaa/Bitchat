@@ -32,7 +32,7 @@ def routine():
         peers.updatePeers() # tries to get more peers, expands network
         peers.gatherAlives() # organizes who is online
         time.sleep(30) # does ^^ this every 5 minutes
-        peers.cleanup() # clean up code, broken
+        #peers.cleanup() # clean up code, broken
 
 def messaging():
     msg = input(": ")
