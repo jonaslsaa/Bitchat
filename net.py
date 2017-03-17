@@ -11,7 +11,6 @@ def StartListen():
     host = "127.0.0.1"
     port = 1900
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.bind((host, port))
     
     while 1:
         data, addr = sock.recvfrom(1024)
