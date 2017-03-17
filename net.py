@@ -51,6 +51,7 @@ def gotData(rawdata, addr):
             localpeers = ps.getLocalPeers()
             for p in localpeers:
                 SendData("peer|"+str(p), addr)
+                time.sleep(.1)
 
                 
 def SendData(data, host):
