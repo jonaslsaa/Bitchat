@@ -22,6 +22,7 @@ def StartListen():
         sock.close()
 
 def gotData(rawdata, addr):
+    global alives
     print("recv: "+rawdata)
     data = rawdata.split("|")
     
@@ -34,7 +35,6 @@ def gotData(rawdata, addr):
             if canPost == True:
                 print(data[1])
                 history.append(data[2])
-                alives = getAlives()
                 for a in alives:
                     if a != addr:
                         SendData(rawdata, a)
