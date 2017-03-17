@@ -34,16 +34,16 @@ def gotData(rawdata, addr):
             if canPost == True:
                 print(data[1])
                 history.append(data[2])
-                alives = ps.getAlives()
+                alives = getAlives()
                 for a in alives:
                     if a != addr:
                         SendData(rawdata, a)
     
     if data[0] == "ping":
         SendData("alive", addr)
-        ps.aliveAppend(addr)
+        aliveAppend(addr)
     if data[0] == "alive":
-        ps.aliveAppend(addr)
+        aliveAppend(addr)
     if data[0] == "peer":
         if len(data) >= 1:
             ps.addPeer(data[1])
