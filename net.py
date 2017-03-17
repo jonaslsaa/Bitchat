@@ -18,9 +18,9 @@ def StartListen():
         gotData(data, addr) # < upgrade to threading
     sock.close()
 
-def gotData(data, addr):
-    print(data)
-    data = data.split("|")
+def gotData(rawdata, addr):
+    print(rawdata)
+    rawdata = data.split("|")
     
     if data[0] == "msg":
         canPost = True
@@ -31,6 +31,9 @@ def gotData(data, addr):
             if canPost == True:
                 print(data[1])
                 history.append(data[3])
+                for a in peers.alives:
+                    if a != addr:
+                        SendData(rawdata, a)
     
     if data[0] == "ping":
         SendData("alive", addr)
