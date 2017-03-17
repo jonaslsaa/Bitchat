@@ -66,7 +66,7 @@ def id(size=6, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
 def gatherAlives():
-    peers = getLocalPeers()
+    peers = ps.getLocalPeers()
     global alives
     alives = []
     #print(peers[0])
