@@ -57,7 +57,7 @@ def gotData(rawdata, addr):
 def SendData(data, host):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
     print("sending: "+data+", to: "+host)
-    sock.sendto(bytes(data, "utf-8"), (host, 1902))
+    sock.sendto(bytes(data, "utf-8"), (host, 1900))
     sock.close()
 
 
