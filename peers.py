@@ -14,21 +14,29 @@ def gatherAlives():
     peers = getLocalPeers()
     global alives
     alives = []
+    #print(peers[0])
     for addr in peers:
+        #print("addr: "+addr)
         net.SendData("ping", addr)
 
 def cleanup():
     clean = []
+    wasCleaned = False
     global alives
-    if len(alives[0]) > 0:
-        clean.append(alives[0])
     for i in alives:
-        for c in clean:
-            if i != c:
-                clean.append(i)
-    alives = clean
+        if i not in clean:
+            clean.append(i)
+            wasCleaned == True
+    if wasCleaned == True:
+        alives = clean
+            
 
 def updatePeers():
     global alives
     for addr in alives:
-        SendData("updatepeers", addr)
+        net.SendData("updatepeers", addr)
+
+def aliveAppend(x):
+    alives.append(x)
+def getAlives():
+    return alives
