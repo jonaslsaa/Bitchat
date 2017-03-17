@@ -72,7 +72,7 @@ def gatherAlives():
     #print(peers[0])
     for addr in peers:
         #print("addr: "+addr)
-        net.SendData("ping", addr)
+        SendData("ping", addr)
 
 def cleanup():
     clean = []
@@ -88,6 +88,6 @@ def cleanup():
 def updatePeers():
     global alives
     for addr in alives:
-        net.SendData("updatepeers", addr)
+        SendData("updatepeers", addr)
 
 
