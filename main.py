@@ -29,9 +29,9 @@ def startup():
 
 def routine():
     while 1:
-        peers.cleanup() # clean up code, does nothing
-        peers.gatherAlives() # organizes who is online
         peers.updatePeers() # tries to get more peers, expands network
+        peers.gatherAlives() # organizes who is online
+        peers.cleanup() # clean up code
         time.sleep(30) # does ^^ this every 5 minutes
 
 def messaging():
@@ -40,5 +40,4 @@ def messaging():
     for addr in peers.alives:
         net.SendData("msg|"+data+"|"+net.id(), addr)
         
-
 startup()
