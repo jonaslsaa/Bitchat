@@ -29,8 +29,8 @@ def startup():
 
 def routine():
     while 1:
-        peers.updatePeers() # tries to get more peers, expands network
-        peers.gatherAlives() # organizes who is online
+        net.updatePeers() # tries to get more peers, expands network
+        net.gatherAlives() # organizes who is online
         time.sleep(30) # does ^^ this every 5 minutes
         #peers.cleanup() # clean up code, broken
 
