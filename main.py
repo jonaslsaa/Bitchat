@@ -32,14 +32,14 @@ def routine():
         net.updatePeers() # tries to get more peers, expands network
         net.gatherAlives() # organizes who is online
         time.sleep(30) # does ^^ this every 5 minutes
-        #peers.cleanup() # clean up code, broken
+        #net.cleanup() # clean up code, broken
 
 def messaging():
     msg = input(": ")
     if msg != "":
         ID = net.id()
         data = str(username) + ": " + str(msg)
-        alives = peers.getAlives()
+        alives = net.getAlives()
         for addr in alives:
             threading.Thread(target=net.SendData, args=("msg|"+data+"|"+ID,addr)).start()
         print(alives)
