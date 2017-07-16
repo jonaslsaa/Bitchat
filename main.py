@@ -4,11 +4,8 @@ import peers
 import net
 import local as io
 import socket
-from requests import get
 
 username = "annonymous"
-
-
 
 def startup():
     if io.check(peers.peersFile) == False: # checks for peers file

@@ -4,6 +4,7 @@ import threading
 import peers as ps
 import string
 import random
+from requests import get
 
 history = []
 alives = []
@@ -90,7 +91,7 @@ def updatePeers():
 def aliveAppend(x):
     global alives
     #print("added: "+x)
-    if x not in alives and !isIPMine(x):
+    if x not in alives and not isIPMine(x):
         alives.append(x)
 def getAlives():
     global alives
