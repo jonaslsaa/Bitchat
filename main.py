@@ -45,7 +45,7 @@ def messaging():
         alives = net.getAlives()
         for addr in alives:
             threading.Thread(target=net.SendData, args=("msg|"+data+"|"+ID,addr)).start()
-        print(alives)
+        #print(alives)
 
 def message(mData, mAddr):
     net.SendData(mData, mAddr)
