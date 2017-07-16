@@ -48,6 +48,7 @@ def gotData(rawdata, addr):
         aliveAppend(addr)
     if data[0] == "peer":
         if len(data) >= 1:
+            aliveAppend(addr)
             ps.addPeer(data[1])
     if data[0] == "updatepeers":
         if len(data) >= 1:
@@ -69,8 +70,6 @@ def id(size=6, chars=string.ascii_lowercase + string.digits):
 
 def gatherAlives():
     peers = ps.getLocalPeers()
-    global alives
-    alives = []
     #print(peers[0])
     for addr in peers:
         #print("addr: "+addr)
