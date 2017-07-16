@@ -8,6 +8,9 @@ import random
 history = []
 alives = []
 
+local_ip = [(s.connect(('8.8.8.8', 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]
+external_ip = get('https://api.ipify.org').text
+
 def StartListen():
     host = "" #your ip
     port = 19001
@@ -76,15 +79,8 @@ def gatherAlives():
         SendData("ping", addr)
 
 def cleanup():
-    clean = []
-    wasCleaned = False
     global alives
-    for i in alives:
-        if i not in clean:
-            clean.append(i)
-            wasCleaned == True
-    if wasCleaned == True:
-        alives = clean
+    alives = list(set(alives))
 
 def updatePeers():
     global alives
@@ -93,9 +89,14 @@ def updatePeers():
 
 def aliveAppend(x):
     global alives
-    print("added: "+x)
-    if x not in alives:
+    #print("added: "+x)
+    if x not in alives and !isIPMine(x):
         alives.append(x)
 def getAlives():
     global alives
     return alives
+def isIPMine(ip):
+    if ip != local_ip and ip != external_ip:
+        return True
+    else:
+        return False
