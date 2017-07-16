@@ -23,9 +23,9 @@ def StartListen():
 
 def gotData(rawdata, addr):
     global alives
-    print("recv: "+rawdata)
+    #print("recv: "+rawdata)
     data = rawdata.split("|")
-    
+
     if data[0] == "msg":
         canPost = True
         if len(data) >= 3:
@@ -38,11 +38,13 @@ def gotData(rawdata, addr):
                 for a in alives:
                     if a != addr:
                         SendData(rawdata, a)
-    
+
     if data[0] == "ping":
         SendData("alive", addr)
-        #aliveAppend(addr)
+        ps.addPeer(addr)
+        aliveAppend(addr)
     if data[0] == "alive":
+        ps.addPeer(addr)
         aliveAppend(addr)
     if data[0] == "peer":
         if len(data) >= 1:
@@ -54,10 +56,10 @@ def gotData(rawdata, addr):
                 SendData("peer|"+str(p), addr)
                 time.sleep(.1)
 
-                
+
 def SendData(data, host):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-    print("sending: "+data+", to: "+host)
+    #print("sending: "+data+", to: "+host)
     sock.sendto(bytes(data, "utf-8"), (host, 19001))
     sock.close()
 
@@ -84,14 +86,14 @@ def cleanup():
             wasCleaned == True
     if wasCleaned == True:
         alives = clean
-            
+
 def updatePeers():
     global alives
     for addr in alives:
         SendData("updatepeers", addr)
 
 def aliveAppend(x):
+    print("added: "+x)
     alives.append(x)
 def getAlives():
     return alives
-
