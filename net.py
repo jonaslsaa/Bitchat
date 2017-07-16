@@ -92,7 +92,10 @@ def updatePeers():
         SendData("updatepeers", addr)
 
 def aliveAppend(x):
+    global alives
     print("added: "+x)
-    alives.append(x)
+    if x not in alives:
+        alives.append(x)
 def getAlives():
+    global alives
     return alives
