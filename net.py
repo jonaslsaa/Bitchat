@@ -97,7 +97,7 @@ def getAlives():
     global alives
     return alives
 def isIPMine(ip):
-    if ip != local_ip and ip != external_ip:
+    if ip == local_ip or ip == external_ip:
         return True
     else:
         return False
