@@ -6,5 +6,5 @@ def getLocalPeers():
 def addPeer(peer):
     print("added locally: "+peer)
     localPeers = getLocalPeers()
-    if local not in localPeers:
+    if peer not in localPeers:
         io.append(str(peer), peersFile)
